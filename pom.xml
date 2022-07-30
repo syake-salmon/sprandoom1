@@ -7,6 +7,7 @@
         <groupId>com.syakeapps</groupId>
         <artifactId>sprandoom-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../sprandoom-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>sprandoom1</artifactId>
