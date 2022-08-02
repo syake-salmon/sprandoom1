@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,maven,java,web
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,maven,java,web
 
+src/main/webapp/img/buki/*
+
 ### Eclipse ###
 .metadata
 bin/
