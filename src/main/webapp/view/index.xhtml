@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://bootsfaces.net/ui"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  lang="en">
+<h:head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffa500" />
+  <link rel="alternate" hreflang="en" lang="en" />
+  <link rel="alternate" hreflang="ja" lang="ja" />
+  <link rel="apple-touch-icon" href="../img/icon-192x192.png" />
+  <link rel="manifest" href="../manifest.json" />
+  <link rel="stylesheet" href="../css/custom-button-group.css" />
+  <title>スプランダム１ - Sprandoom1</title>
+</h:head>
+<h:body>
+  <b:container>
+    <b:form prependId="false">
+      <!-- HowToUse Modal HEAD -->
+      <b:modal id="howtouseModal" title="#{msg['LABEL_WHATSTHIS']}">
+        <p>#{msg['TEXT_HOWTOUSE']}</p>
+        <p>
+          #{msg['TEXT_CAUTION']}(<a href="https://twitter.com/syakeApps"
+            target="_blank">@syakeApps</a>）
+        </p>
+        <f:facet name="footer">
+          <b:button value="#{msg['LABEL_CLOSE']}" look="secondary"
+            dismiss="modal" />
+        </f:facet>
+      </b:modal>
+      <!-- HowToUse Modal FOOT -->
+
+      <b:row>
+        <b:column style-class="text-center">
+          <img src="../img/banner-640x100.png" class="img-fluid"
+            style="max-width: 100%; , height: auto;" alt="Logo Banner" />
+        </b:column>
+      </b:row>
+
+      <b:row>
+        <b:column style-class="text-center">
+          <button type="button" data-target="#howtouseModal" data-toggle="modal"
+            class="btn btn-link">#{msg['LABEL_WHATSTHIS']}</button>
+        </b:column>
+      </b:row>
+
+      <b:row>
+        <b:column style-class="text-center">
+          <img src="../img/buki/#{BB.pickupedWeapon.id}.png" class="img-fluid"
+            alt="Weapon Image" />
+        </b:column>
+      </b:row>
+
+      <b:row>
+        <b:column style-class="text-center">
+          <h5>#{BB.pickupedWeapon.getLocaleName(BB.userLocale)}</h5>
+        </b:column>
+      </b:row>
+
+      <b:row>
+        <b:column col-lg="3" col-md="3" />
+        <b:column col-lg="6" col-md="6">
+          <b:panel title="#{msg['LABEL_SETTING']}" collapsed="true">
+            <h:outputLabel value="#{msg['LABEL_CLASS']}" for="class" />
+            <b:selectMultiMenu id="class" value="#{BB.selectedClassIds}"
+              all-selected-text="#{msg['LABEL_ALL_SELECTED']}"
+              non-selected-text="#{msg['LABEL_NO_SELECTED']}"
+              size="#{APP.classes.size()}" >
+              <f:selectItems value="#{APP.classes}" var="c" itemValue="#{c.id}"
+                itemLabel="#{c.getLocaleName(BB.userLocale)}" />
+            </b:selectMultiMenu>
+            <b:formGroup>
+              <h:outputLabel value="#{msg['LABLE_SUB']}" for="sub" />
+              <b:selectOneMenu id="sub" value="#{BB.selectedSubId}">
+                <f:selectItem itemLabel="#{msg['LABEL_NO_SELECTED']}"
+                  itemValue="0" />
+                <f:selectItems value="#{APP.subs}" var="s" itemValue="#{s.id}"
+                  itemLabel="#{s.getLocaleName(BB.userLocale)}" />
+              </b:selectOneMenu>
+            </b:formGroup>
+            <b:formGroup>
+              <h:outputLabel value="#{msg['LABLE_SPECIAL']}" for="special" />
+              <b:selectOneMenu id="special" value="#{BB.selectedSpecialId}">
+                <f:selectItem itemLabel="#{msg['LABEL_NO_SELECTED']}"
+                  itemValue="0" />
+                <f:selectItems value="#{APP.specials}" var="s"
+                  itemValue="#{s.id}"
+                  itemLabel="#{s.getLocaleName(BB.userLocale)}" />
+              </b:selectOneMenu>
+            </b:formGroup>
+          </b:panel>
+        </b:column>
+        <b:column col-lg="3" col-md="3" />
+      </b:row>
+
+      <b:row>
+        <b:column col-lg="3" col-md="3" />
+        <b:column col-lg="6" col-md="6" style-class="text-center">
+          <h:commandButton styleClass="btn btn-primary btn-block" value="#{msg['LABEL_RANDOMIZE']}" actionListener="#{BB.randomizeWeapon()}" />
+
+        </b:column>
+        <b:column col-lg="3" col-md="3" />
+      </b:row>
+
+    </b:form>
+
+    <b:growl global-only="true" show-detail="true" allow-dismiss="true"
+      placementFrom="top" />
+  </b:container>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register("../service-worker.js", {scope: "./"}).then(function(reg) {
+        console.log('ServiceWorker registration successful with scope: ', reg.scope);
+      }).catch(function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    }
+  </script>
+</h:body>
+</html>

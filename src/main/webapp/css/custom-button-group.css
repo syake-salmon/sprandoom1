@@ -1,0 +1,11 @@
+div>.btn-group {
+    width: 100%;
+}
+
+div>.btn-group>button {
+    width: 100%;
+}
+
+div>.btn-group>ul {
+    width: 100%;
+}
