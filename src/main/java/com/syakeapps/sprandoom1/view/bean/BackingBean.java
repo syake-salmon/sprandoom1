@@ -34,7 +34,7 @@ public class BackingBean implements Serializable {
     @Inject
     private ApplicationContext cxt;
 
-    @PersistenceContext(unitName = "sprandoom1PU")
+    @PersistenceContext(unitName = ApplicationContext.PERSISTENCE_UNIT_NAME)
     private EntityManager em;
 
     private ResourceBundle bundle;

@@ -18,9 +18,11 @@ import lombok.Getter;
 @ApplicationScoped
 @Named(value = "APP")
 public class ApplicationContext {
+    public static final String PERSISTENCE_UNIT_NAME = "sprandoom1PU";
+
     private static final Logger LOGGER = Logger.getLogger(ApplicationContext.class.getName());
 
-    @PersistenceContext(unitName = "sprandoom1PU")
+    @PersistenceContext(unitName = PERSISTENCE_UNIT_NAME)
     private EntityManager em;
 
     /* CONST */
