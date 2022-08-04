@@ -18,6 +18,10 @@
     <exception-type>javax.faces.application.ViewExpiredException</exception-type>
     <location>/index.faces</location>
   </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error500.html</location>
+  </error-page>
   <context-param>
     <param-name>BootsFaces_USETHEME</param-name>
     <param-value>true</param-value>
