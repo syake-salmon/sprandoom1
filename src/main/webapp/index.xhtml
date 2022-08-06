@@ -42,11 +42,11 @@
   <b:container>
     <b:form prependId="false">
       <!-- HowToUse Modal HEAD -->
-      <b:modal id="howtouseModal" title="#{msg['LABEL_WHATSTHIS']}">
+      <b:modal id="howtouse-modal" title="#{msg['LABEL_WHATSTHIS']}">
         <p>#{msg['TEXT_HOWTOUSE']}</p>
         <p>
           #{msg['TEXT_CAUTION']}(<a href="https://twitter.com/syakeApps"
-            target="_blank">@syakeApps</a>）
+            target="_blank">@syakeApps</a>)
         </p>
         <f:facet name="footer">
           <b:button value="#{msg['LABEL_CLOSE']}" look="secondary"
@@ -55,34 +55,34 @@
       </b:modal>
       <!-- HowToUse Modal FOOT -->
 
-      <b:row>
+      <b:row id="banner-area">
         <b:column style-class="text-center">
           <img src="./img/banner-640x100.png" class="img-fluid"
             style="max-width: 100%; , height: auto;" alt="Logo Banner" />
         </b:column>
       </b:row>
 
-      <b:row>
+      <b:row id="howtouse-link-area">
         <b:column style-class="text-center">
-          <button type="button" data-target="#howtouseModal" data-toggle="modal"
+          <button type="button" data-target="#howtouse-modal" data-toggle="modal"
             class="btn btn-link">#{msg['LABEL_WHATSTHIS']}</button>
         </b:column>
       </b:row>
 
-      <b:row>
+      <b:row id="weapon-img-area">
         <b:column style-class="text-center">
           <img src="./img/buki/#{BB.pickupedWeapon.id}.png" class="img-fluid"
             alt="Weapon Image" />
         </b:column>
       </b:row>
 
-      <b:row>
+      <b:row id="weapon-name-area">
         <b:column style-class="text-center">
           <h5>#{BB.pickupedWeapon.getLocaleName(BB.userLocale)}</h5>
         </b:column>
       </b:row>
 
-      <b:row>
+      <b:row id="setting-panel-area">
         <b:column col-lg="3" col-md="3" />
         <b:column col-lg="6" col-md="6">
           <b:panel title="#{msg['LABEL_SETTING']}" collapsed="true">
@@ -118,13 +118,12 @@
         <b:column col-lg="3" col-md="3" />
       </b:row>
 
-      <b:row>
+      <b:row id="randomize-btn-area">
         <b:column col-lg="3" col-md="3" />
         <b:column col-lg="6" col-md="6" style-class="text-center">
           <h:commandButton styleClass="btn btn-primary btn-block"
             value="#{msg['LABEL_RANDOMIZE']}"
             actionListener="#{BB.randomizeWeapon()}" />
-
         </b:column>
         <b:column col-lg="3" col-md="3" />
       </b:row>
