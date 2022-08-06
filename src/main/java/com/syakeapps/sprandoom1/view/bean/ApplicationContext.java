@@ -13,8 +13,6 @@ import com.syakeapps.sprandoom1.jpa.bean.Special;
 import com.syakeapps.sprandoom1.jpa.bean.Sub;
 import com.syakeapps.sprandoom1.jpa.bean.WeaponClass;
 
-import lombok.Getter;
-
 @ApplicationScoped
 @Named(value = "APP")
 public class ApplicationContext {
@@ -26,13 +24,10 @@ public class ApplicationContext {
     private EntityManager em;
 
     /* CONST */
-    @Getter
     private List<WeaponClass> classes;
 
-    @Getter
     private List<Sub> subs;
 
-    @Getter
     private List<Special> specials;
 
     @PostConstruct
@@ -46,5 +41,13 @@ public class ApplicationContext {
 
     public List<WeaponClass> getClasses() {
         return classes;
+    }
+
+    public List<Sub> getSubs() {
+        return subs;
+    }
+
+    public List<Special> getSpecials() {
+        return specials;
     }
 }

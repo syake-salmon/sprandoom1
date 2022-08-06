@@ -22,8 +22,6 @@ import javax.transaction.Transactional;
 import com.syakeapps.sprandoom1.jpa.bean.Weapon;
 import com.syakeapps.sprandoom1.jpa.bean.WeaponClass;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.bootsfaces.utils.FacesMessages;
 
 @SuppressWarnings("serial")
@@ -40,26 +38,21 @@ public class BackingBean implements Serializable {
     private ResourceBundle bundle;
 
     /* Randomizer User Setting */
-    @Getter
-    @Setter
     private String selectedClassIds;
 
-    @Getter
-    @Setter
     private int selectedSubId = 0;
 
-    @Getter
-    @Setter
     private int selectedSpecialId = 0;
 
     /* Randomized Weapon */
-    @Getter
     private Weapon pickupedWeapon;
 
     @PostConstruct
     private void initialize() {
+        ResourceBundle.Control control = ResourceBundle.Control
+                .getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT);
         bundle = ResourceBundle.getBundle("locale.Messages",
-                FacesContext.getCurrentInstance().getViewRoot().getLocale());
+                FacesContext.getCurrentInstance().getViewRoot().getLocale(), control);
 
         List<WeaponClass> classes = cxt.getClasses();
         selectedClassIds = classes.stream().map(c -> {
@@ -127,7 +120,36 @@ public class BackingBean implements Serializable {
         pickupedWeapon = weapons.get(r);
     }
 
+    /* GETTER & SETTER */
     public Locale getUserLocale() {
         return bundle.getLocale();
+    }
+
+    public String getSelectedClassIds() {
+        return selectedClassIds;
+    }
+
+    public void setSelectedClassIds(String selectedClassIds) {
+        this.selectedClassIds = selectedClassIds;
+    }
+
+    public int getSelectedSubId() {
+        return selectedSubId;
+    }
+
+    public void setSelectedSubId(int selectedSubId) {
+        this.selectedSubId = selectedSubId;
+    }
+
+    public int getSelectedSpecialId() {
+        return selectedSpecialId;
+    }
+
+    public void setSelectedSpecialId(int selectedSpecialId) {
+        this.selectedSpecialId = selectedSpecialId;
+    }
+
+    public Weapon getPickupedWeapon() {
+        return pickupedWeapon;
     }
 }
