@@ -10,6 +10,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Setter;
+
 @Entity
 @Table(name = "special")
 @NamedQuery(name = Special.FIND_ALL, query = "SELECT s FROM Special s")
@@ -18,47 +20,35 @@ public class Special extends MultilingualEntityBase {
 
     @Id
     @Column(name = "spc_id")
+    @Setter(onMethod_ = { @lombok.Generated })
     private int id;
 
     @Column(name = "spc_jpn_name")
+    @Setter(onMethod_ = { @lombok.Generated })
     private String jpnName;
 
     @Column(name = "spc_eng_name")
+    @Setter(onMethod_ = { @lombok.Generated })
     private String engName;
 
     @OneToMany
     @JoinColumn(name = "special")
+    @Setter(onMethod_ = { @lombok.Generated })
     private List<Weapon> weapons;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getJpnName() {
         return jpnName;
-    }
-
-    public void setJpnName(String jpnName) {
-        this.jpnName = jpnName;
     }
 
     public String getEngName() {
         return engName;
     }
 
-    public void setEngName(String engName) {
-        this.engName = engName;
-    }
-
     public List<Weapon> getWeapons() {
         return weapons;
-    }
-
-    public void setWeapons(List<Weapon> weapons) {
-        this.weapons = weapons;
     }
 }
