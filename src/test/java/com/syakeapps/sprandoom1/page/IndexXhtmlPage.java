@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class IndexXhtmlPage {
-    protected WebDriver driver;
+    private WebDriver driver;
 
     /* HEAD */
     @FindBy(xpath = "//meta[@name='description']")
@@ -42,8 +42,8 @@ public class IndexXhtmlPage {
 
     public IndexXhtmlPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("randomize-btn-area")));
         this.driver = driver;
     }
 
@@ -98,18 +98,31 @@ public class IndexXhtmlPage {
         return lis.stream().map(e -> e.getText()).toArray(String[]::new);
     }
 
+    public boolean isVisibleHowToUseModal() {
+        return howToUseModal.isDisplayed();
+    }
+
+    public boolean isOpenedSettingPanel() {
+        return Boolean.valueOf(settingPanelArea.findElement(By.xpath(".//h4/a")).getAttribute("aria-expanded"));
+    }
+
     /* SCREEN TRANSITION */
-    public IndexXhtmlPage openHowToUseLink() {
+    public IndexXhtmlPage openHowToUseModal() {
         howToUseLinkArea.findElement(By.xpath(".//button[@type='button']")).click();
         return new IndexXhtmlPage(driver);
     }
 
-    public IndexXhtmlPage openSettingPanel() {
+    public IndexXhtmlPage closeHowToUseModal() {
+        howToUseModal.findElement(By.xpath(".//button[@type='button' and @class='btn btn-secondary']")).click();
+        return new IndexXhtmlPage(driver);
+    }
+
+    public IndexXhtmlPage clickSettingPanel() {
         settingPanelArea.findElement(By.xpath(".//h4/a")).click();
         return new IndexXhtmlPage(driver);
     }
 
-    public IndexXhtmlPage randomize() {
+    public IndexXhtmlPage clickRandomizeButton() {
         randomizeBtnArea.findElement(By.xpath(".//input[@type='submit']")).click();
         return new IndexXhtmlPage(driver);
     }
