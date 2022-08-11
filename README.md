@@ -1,2 +1,2 @@
-# sprandoom1
+# Sprandoom1
 [see also parent](../../../sprandoom-parent)
