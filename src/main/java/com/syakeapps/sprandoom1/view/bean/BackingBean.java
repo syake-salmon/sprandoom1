@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.ResourceBundle.Control;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -30,36 +31,33 @@ import net.bootsfaces.utils.FacesMessages;
 public class BackingBean implements Serializable {
 
     @Inject
-    private ApplicationContext cxt;
+    private ApplicationContext context;
 
-    @PersistenceContext(unitName = ApplicationContext.PERSISTENCE_UNIT_NAME)
+    @PersistenceContext
     private EntityManager em;
 
     private ResourceBundle bundle;
 
     /* Randomizer User Setting */
     private String selectedClassIds;
-
     private int selectedSubId = 0;
-
     private int selectedSpecialId = 0;
 
     /* Randomized Weapon */
     private Weapon pickupedWeapon;
 
     @PostConstruct
-    private void initialize() {
-        ResourceBundle.Control control = ResourceBundle.Control
-                .getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT);
+    public void postConstruct() {
         bundle = ResourceBundle.getBundle("locale.Messages",
-                FacesContext.getCurrentInstance().getViewRoot().getLocale(), control);
+                FacesContext.getCurrentInstance().getViewRoot().getLocale(),
+                Control.getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT));
 
-        List<WeaponClass> classes = cxt.getClasses();
+        List<WeaponClass> classes = context.getClasses();
         selectedClassIds = classes.stream().map(c -> {
             return String.valueOf(c.getId());
         }).collect(Collectors.joining(","));
 
-        pickupedWeapon = em.find(Weapon.class, 1);
+        pickupedWeapon = context.getWeapons().get(0);
 
         FacesMessages.info(bundle.getString("MSG_INFO_INITIALIZED"));
     }
@@ -77,8 +75,8 @@ public class BackingBean implements Serializable {
         }).collect(Collectors.toList());
 
         List<Weapon> weapons = new ArrayList<>();
-        if (convertedIds.size() == cxt.getClasses().size()) {
-            weapons = em.createNamedQuery(Weapon.FIND_ALL, Weapon.class).getResultList();
+        if (convertedIds.size() == context.getClasses().size()) {
+            weapons = context.getWeapons();
         } else {
             List<WeaponClass> classes = em.createNamedQuery(WeaponClass.FIND_BY_IDS, WeaponClass.class)
                     .setParameter("ids", convertedIds).getResultList();

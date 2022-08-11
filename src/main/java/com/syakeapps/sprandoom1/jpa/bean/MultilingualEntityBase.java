@@ -8,7 +8,7 @@ public abstract class MultilingualEntityBase {
 
     protected abstract String getEngName();
 
-    public String getLocaleName(Locale locale) {
+    public String getLocalizedName(Locale locale) {
         return locale.equals(Locale.JAPANESE) ? getJpnName() : getEngName();
     }
 }
