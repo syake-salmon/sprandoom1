@@ -88,7 +88,7 @@ public class IT_IndexXhtmlTest extends Arquillian {
         for (int i = 0; i < locales.size(); i++) {
             Locale locale = locales.get(i);
 
-            options.add("--lang=" + locale.getLanguage());
+            options.add("--lang=" + locale.getLanguage() + "-" + locale.getCountry());
             WebDriver driver = new ChromeDriver(new ChromeOptions().addArguments(options));
 
             ResourceBundle.Control control = ResourceBundle.Control
