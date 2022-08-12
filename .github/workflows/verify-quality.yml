@@ -37,7 +37,7 @@ jobs:
     - name: Verify Quality
       run: mvn clean verify --batch-mode `
         --file pom.xml `
-        --settings .github/workflows/build_settings.xml `
+        --settings .github/workflows/settings.xml `
         --activate-profiles="GitHub Actions CI"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
