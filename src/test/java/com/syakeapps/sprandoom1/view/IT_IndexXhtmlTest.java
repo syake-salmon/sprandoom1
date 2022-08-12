@@ -42,8 +42,9 @@ public class IT_IndexXhtmlTest extends Arquillian {
         return ShrinkWrap.create(WebArchive.class).addPackages(true, "com.syakeapps")
                 .addAsResource(new File(RESOURCES_ROOT + "/locale", "Messages_en.properties"),
                         "locale/Messages_en.properties")
-                .addAsResource(new File(RESOURCES_ROOT + "/locale", "Messages_ja.properties"),
-                        "locale/Messages_ja.properties")
+                // .addAsResource(new File(RESOURCES_ROOT + "/locale",
+                // "Messages_ja.properties"),
+                // "locale/Messages_ja.properties")
                 .addAsResource(new File(RESOURCES_ROOT + "/locale", "Messages.properties"),
                         "locale/Messages.properties")
                 .addAsResource(new File(RESOURCES_ROOT + "/META-INF", "persistence.xml"), "META-INF/persistence.xml")
@@ -88,12 +89,11 @@ public class IT_IndexXhtmlTest extends Arquillian {
         for (int i = 0; i < locales.size(); i++) {
             Locale locale = locales.get(i);
 
-            options.add("--lang=" + locale.getLanguage() + "_" + locale.getCountry());
+            options.add("--lang=" + locale.getLanguage());
             WebDriver driver = new ChromeDriver(new ChromeOptions().addArguments(options));
 
-            ResourceBundle.Control control = ResourceBundle.Control
-                    .getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT);
-            ResourceBundle bundle = ResourceBundle.getBundle("locale.Messages", locale, control);
+            ResourceBundle bundle = ResourceBundle.getBundle("locale.Messages", locale,
+                    ResourceBundle.Control.getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT));
 
             params[i] = new Object[] { locale, driver, bundle };
         }
