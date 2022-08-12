@@ -20,13 +20,12 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Install Google Chrome and ChromeDriver
-      uses: nanasess/setup-chromedriver@v1
-
     - name: Install Japanese language pack
       run: |
-        sudo apt install language-pack-ja
-        sudo localectl set-locale LANG=ja_JP.UTF-8
+        sudo apt install -y language-pack-ja chromium-browser-l10n
+
+    - name: Install Google Chrome and ChromeDriver
+      uses: nanasess/setup-chromedriver@v1
 
     - name: Run UT/IT
       run: mvn --batch-mode clean surefire:test failsafe:integration-test verify --file pom.xml --settings .github/workflows/build_settings.xml --activate-profiles="GitHub Actions CI"
