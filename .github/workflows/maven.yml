@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -20,9 +20,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Install Japanese language pack
-      run: |
-        sudo apt install -y language-pack-ja chromium-browser-l10n
+#    - name: Install Japanese language pack
+#      run: |
+#        sudo apt install -y language-pack-ja chromium-browser-l10n
 
     - name: Install Google Chrome and ChromeDriver
       uses: nanasess/setup-chromedriver@v1
