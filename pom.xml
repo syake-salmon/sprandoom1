@@ -20,7 +20,7 @@
     <profile>
       <id>GitHub Actions CI</id>
       <properties>
-        <webdriver.chrome.driver>C:/webdriver/chrome/104.0.5112.79/chromedriver.exe</webdriver.chrome.driver>
+        <webdriver.chrome.driver>/usr/local/bin/chromedriver</webdriver.chrome.driver>
         <skip.ut>false</skip.ut>
         <skip.it>false</skip.it>
         <skip.analyze>false</skip.analyze>
