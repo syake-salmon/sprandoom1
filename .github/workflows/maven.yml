@@ -20,17 +20,20 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Setup Python
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
           python-version: '3.8'
           architecture: 'x64'
-    - run: |
+
+    - name: Install Google Chrome
+      run: |
           sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           sudo apt update
           sudo apt-get install google-chrome-stable
-          pip install get-chrome-driver --upgrade
-          pip install -r selenium/requirements.txt
+
+    - name: Install ChromeDriver
+      uses: nanasess/setup-chromedriver@v1
 
     - name: Run UT/IT
       run: mvn --batch-mode clean surefire:test failsafe:integration-test verify --file pom.xml --settings .github/workflows/build_settings.xml --activate-profiles="GitHub Actions CI"
