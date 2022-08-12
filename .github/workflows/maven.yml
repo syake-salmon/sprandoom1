@@ -24,7 +24,7 @@ jobs:
       uses: nanasess/setup-chromedriver@v1
 
     - name: Install Japanese Font
-      run: sudo apt install fonts-noto
+      run: sudo apt install fonts-ipafont fonts-ipaexfont
 
     - name: Run UT/IT
       run: mvn --batch-mode clean surefire:test failsafe:integration-test verify --file pom.xml --settings .github/workflows/build_settings.xml --activate-profiles="GitHub Actions CI"
