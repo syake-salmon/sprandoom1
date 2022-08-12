@@ -5,7 +5,7 @@
     <server>
       <id>github</id>
       <username>syake-salmon</username>
-      <password>${env.GH_PACKAGES_PASSWORD}</password>
+      <password>${GH_PACKAGES_PASSWORD}</password>
     </server>
   </servers>
 </settings>
