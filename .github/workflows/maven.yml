@@ -45,8 +45,7 @@ jobs:
     - name: Analyze with Sonarcloud
       run: mvn jacoco:report sonar:sonar --batch-mode `
         --file pom.xml `
-        --activate-profiles="GitHub Actions CI" `
-        -Dsonar.login=${SONAR_TOKEN}
+        --activate-profiles="GitHub Actions CI"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
