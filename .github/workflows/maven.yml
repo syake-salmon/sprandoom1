@@ -20,20 +20,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-   # - name: Set up Python
-   #   uses: actions/setup-python@v2
-   #   with:
-   #       python-version: '3.8'
-   #       architecture: 'x64'
-
-   # - name: Install Google Chrome
-   #   run: |
-   #       sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-   #       sudo apt update
-   #       sudo apt-get install google-chrome-stable
-
     - name: Install Google Chrome and ChromeDriver
       uses: nanasess/setup-chromedriver@v1
+
+    - name: Install Japanese Font
+      run: sudo apt install fonts-noto
 
     - name: Run UT/IT
       run: mvn --batch-mode clean surefire:test failsafe:integration-test verify --file pom.xml --settings .github/workflows/build_settings.xml --activate-profiles="GitHub Actions CI"
