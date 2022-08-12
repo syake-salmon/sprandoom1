@@ -21,9 +21,10 @@ jobs:
         cache: maven
 
     - name: Setup Python
-      uses: actions/setup-python@v2
-      
-    - name: Install Chrome and ChromeDriver
+    - uses: actions/setup-python@v2
+      with:
+          python-version: '3.8'
+          architecture: 'x64'
       run: |
           sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           sudo apt update
