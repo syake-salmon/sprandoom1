@@ -15,6 +15,10 @@ jobs:
     - name: Checkout
     - uses: actions/checkout@v3
 
+    # Setup ChromeDriver
+    - name: Set up ChromeDriver
+      uses: nanasess/setup-chromedriver@v1.0.8
+
     # Setup Java
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -22,10 +26,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-
-    # Setup ChromeDriver
-    - name: Set up ChromeDriver
-      uses: nanasess/setup-chromedriver@v1.0.8
 
     # Run UT and IT
     - name: Run UT&IT with Maven
