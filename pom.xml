@@ -7,6 +7,27 @@
     <version>1.1-SNAPSHOT</version>
   </parent>
 
+  <profiles>
+    <profile>
+      <id>Local</id>
+      <properties>
+        <webdriver.chrome.driver>C:/webdriver/chrome/104.0.5112.79/chromedriver.exe</webdriver.chrome.driver>
+        <skip.ut>true</skip.ut>
+        <skip.it>true</skip.it>
+        <skip.analyze>true</skip.analyze>
+      </properties>
+    </profile>
+    <profile>
+      <id>GitHub Actions CI</id>
+      <properties>
+        <webdriver.chrome.driver>C:/webdriver/chrome/104.0.5112.79/chromedriver.exe</webdriver.chrome.driver>
+        <skip.ut>false</skip.ut>
+        <skip.it>false</skip.it>
+        <skip.analyze>false</skip.analyze>
+      </properties>
+    </profile>
+  </profiles>
+
   <repositories>
     <repository>
       <id>github</id>
@@ -58,6 +79,16 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
+      </plugin>
+      <!-- Analyze with Sonarcloud -->
+      <plugin>
+        <inherited>true</inherited>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.9.1.2184</version>
+        <configuration>
+          <skip>${skip.analyze}</skip>
+        </configuration>
       </plugin>
     </plugins>
   </build>
