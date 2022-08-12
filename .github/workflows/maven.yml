@@ -20,8 +20,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Install Chrome and ChromeDriver
+    - name: Setup Python
       uses: actions/setup-python@v2
+      
+    - name: Install Chrome and ChromeDriver
       run: |
           sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           sudo apt update
