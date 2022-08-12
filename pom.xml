@@ -14,7 +14,7 @@
         <webdriver.chrome.driver>C:\webdriver\chrome\104.0.5112.79\chromedriver.exe</webdriver.chrome.driver>
         <skip.ut>true</skip.ut>
         <skip.it>true</skip.it>
-        <skip.analyze>true</skip.analyze>
+        <skip.verify>true</skip.verify>
       </properties>
     </profile>
     <profile>
