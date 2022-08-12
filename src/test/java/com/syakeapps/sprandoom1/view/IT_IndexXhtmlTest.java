@@ -22,6 +22,7 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverLogLevel;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -88,7 +89,8 @@ public class IT_IndexXhtmlTest extends Arquillian {
                 }
             };
             options.add("--lang=" + locale.getLanguage());
-            WebDriver driver = new ChromeDriver(new ChromeOptions().addArguments(options));
+            WebDriver driver = new ChromeDriver(
+                    new ChromeOptions().addArguments(options).setLogLevel(ChromeDriverLogLevel.ALL));
 
             ResourceBundle bundle = ResourceBundle.getBundle("locale.Messages", locale,
                     ResourceBundle.Control.getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT));
