@@ -28,19 +28,29 @@ jobs:
       run: |
         $Path = $env:TEMP;
         $Installer = "chrome_installer.exe";
-        Invoke-WebRequest "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26browser%3D0%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26brand%3DGTPM/update2/installers/ChromeSetup.exe" -OutFile $Path\$Installer;
-        Start-Process -FilePath $Path\$Installer -Args "/silent /install" -Verb RunAs -Wait;
+        Invoke-WebRequest "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26browser%3D0%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26brand%3DGTPM/update2/installers/ChromeSetup.exe" \
+          -OutFile $Path\$Installer;
+        Start-Process -FilePath $Path\$Installer \
+                      -Args "/silent /install" \
+                      -Verb RunAs -Wait;
         Remove-Item $Path\$Installer
 
     - name: Install ChromeDriver
       uses: nanasess/setup-chromedriver@v1
 
     - name: Run UT/IT
-      run: mvn --batch-mode clean surefire:test failsafe:integration-test verify --file pom.xml --settings .github/workflows/build_settings.xml --activate-profiles="GitHub Actions CI"
+      run: mvn clean surefire:test failsafe:integration-test verify --batch-mode \
+        --file pom.xml \
+        --settings .github/workflows/build_settings.xml \
+        --activate-profiles="GitHub Actions CI"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Analyze with Sonarcloud
-      run: mvn --batch-mode sonar:sonar --file pom.xml --activate-profiles="GitHub Actions CI" -Dsonar.login=${GITHUB_TOKEN} -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=syake-salmon -Dsonar.projectKey=syake-salmon_sprandoom1
+      run: mvn jacoco:report sonar:sonar --batch-mode \
+        --file pom.xml \
+        --activate-profiles="GitHub Actions CI" \
+        -Dsonar.login=${SONAR_TOKEN}
       env:
-        GITHUB_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
