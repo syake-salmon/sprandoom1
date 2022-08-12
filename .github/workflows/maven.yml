@@ -20,17 +20,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Set up ChromeDriver
+      uses: nanasess/setup-chromedriver@v1.0.8
+
     - name: Build with Maven
       run: mvn --batch-mode clean surefire:test failsafe:integration-test verify -Dskip.ut=false -Dskip.it=false --file pom.xml --settings .github/workflows/build_settings.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Analyze with SonarCloud
-      uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with:
-        args:
-          -Dsonar.projectKey=syake-salmon_sprandoom1
-          -Dsonar.organization=syake-salmon
