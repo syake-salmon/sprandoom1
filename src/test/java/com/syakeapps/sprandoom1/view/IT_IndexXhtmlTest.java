@@ -75,19 +75,18 @@ public class IT_IndexXhtmlTest extends Arquillian {
             }
         };
 
-        List<String> options = new ArrayList<>() {
-            {
-                add("--headless");
-                add("--disable-gpu");
-                add("--window-size=960,1080");
-                add("--disk-cache-size=0");
-            }
-        };
-
         Object[][] params = new Object[locales.size()][];
         for (int i = 0; i < locales.size(); i++) {
             Locale locale = locales.get(i);
 
+            List<String> options = new ArrayList<>() {
+                {
+                    add("--headless");
+                    add("--disable-gpu");
+                    add("--window-size=960,1080");
+                    add("--disk-cache-size=0");
+                }
+            };
             options.add("--lang=" + locale.getLanguage());
             WebDriver driver = new ChromeDriver(new ChromeOptions().addArguments(options));
 
