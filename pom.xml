@@ -89,6 +89,15 @@
         <configuration>
           <skip>${skip.analyze}</skip>
         </configuration>
+        <executions>
+          <execution>
+            <id>sonar</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sonar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

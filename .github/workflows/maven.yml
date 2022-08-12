@@ -1,4 +1,4 @@
-name: Run UT/IT, Analyze
+name: Verify Quality
 
 on:
   push:
@@ -34,17 +34,10 @@ jobs:
     - name: Install ChromeDriver
       uses: nanasess/setup-chromedriver@v1
 
-    - name: Run UT/IT
-      run: mvn clean surefire:test failsafe:integration-test verify jacoco:report --batch-mode `
+    - name: Verify Quality
+      run: mvn clean verify --batch-mode `
         --file pom.xml `
         --settings .github/workflows/build_settings.xml `
-        --activate-profiles="GitHub Actions CI"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Analyze with Sonarcloud
-      run: mvn sonar:sonar --batch-mode `
-        --file pom.xml `
         --activate-profiles="GitHub Actions CI"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
