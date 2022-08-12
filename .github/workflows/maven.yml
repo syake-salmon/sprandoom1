@@ -35,17 +35,17 @@ jobs:
       uses: nanasess/setup-chromedriver@v1
 
     - name: Run UT/IT
-      run: mvn clean surefire:test failsafe:integration-test verify --batch-mode \
-        --file pom.xml \
-        --settings .github/workflows/build_settings.xml \
+      run: mvn clean surefire:test failsafe:integration-test verify --batch-mode `
+        --file pom.xml `
+        --settings .github/workflows/build_settings.xml `
         --activate-profiles="GitHub Actions CI"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Analyze with Sonarcloud
-      run: mvn jacoco:report sonar:sonar --batch-mode \
-        --file pom.xml \
-        --activate-profiles="GitHub Actions CI" \
+      run: mvn jacoco:report sonar:sonar --batch-mode `
+        --file pom.xml `
+        --activate-profiles="GitHub Actions CI" `
         -Dsonar.login=${SONAR_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
