@@ -42,9 +42,8 @@ public class IT_IndexXhtmlTest extends Arquillian {
         return ShrinkWrap.create(WebArchive.class).addPackages(true, "com.syakeapps")
                 .addAsResource(new File(RESOURCES_ROOT + "/locale", "Messages_en.properties"),
                         "locale/Messages_en.properties")
-                // .addAsResource(new File(RESOURCES_ROOT + "/locale",
-                // "Messages_ja.properties"),
-                // "locale/Messages_ja.properties")
+                .addAsResource(new File(RESOURCES_ROOT + "/locale", "Messages_ja.properties"),
+                        "locale/Messages_ja.properties")
                 .addAsResource(new File(RESOURCES_ROOT + "/locale", "Messages.properties"),
                         "locale/Messages.properties")
                 .addAsResource(new File(RESOURCES_ROOT + "/META-INF", "persistence.xml"), "META-INF/persistence.xml")
