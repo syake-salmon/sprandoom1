@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "develop*" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "develop*" ]
 
 jobs:
   build:
@@ -19,6 +19,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn --batch-mode clean surefire:test failsafe:integration-test verify -Dskip.ut=false -Dskip.it=false --file pom.xml --settings .github/workflows/settings.xml
-      env: 
-        GH_PACKAGES_PASSWORD: ${{ secrets.GH_PACKAGES_PASSWORD }}
+      run: mvn --batch-mode clean surefire:test failsafe:integration-test verify -Dskip.ut=false -Dskip.it=false --file pom.xml
