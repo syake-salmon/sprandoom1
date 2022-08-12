@@ -20,19 +20,19 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-          python-version: '3.8'
-          architecture: 'x64'
+   # - name: Set up Python
+   #   uses: actions/setup-python@v2
+   #   with:
+   #       python-version: '3.8'
+   #       architecture: 'x64'
 
-    - name: Install Google Chrome
-      run: |
-          sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo apt update
-          sudo apt-get install google-chrome-stable
+   # - name: Install Google Chrome
+   #   run: |
+   #       sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+   #       sudo apt update
+   #       sudo apt-get install google-chrome-stable
 
-    - name: Install ChromeDriver
+    - name: Install Google Chrome and ChromeDriver
       uses: nanasess/setup-chromedriver@v1
 
     - name: Run UT/IT
