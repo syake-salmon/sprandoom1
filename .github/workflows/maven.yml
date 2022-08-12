@@ -19,4 +19,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn --batch-mode clean surefire:test failsafe:integration-test verify -Dskip.ut=false -Dskip.it=false --file pom.xml
+      run: mvn --batch-mode clean surefire:test failsafe:integration-test verify -Dskip.ut=false -Dskip.it=false --file pom.xml --settings .github/workflows/build_settings.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
