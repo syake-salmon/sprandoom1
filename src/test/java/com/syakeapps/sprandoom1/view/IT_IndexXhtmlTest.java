@@ -108,7 +108,6 @@ public class IT_IndexXhtmlTest extends Arquillian {
 
             /* EXECUTION */
             // first view assertion
-            System.out.println(locale.getLanguage() + " : " + bundle.getString("META_DESCRIPTION"));
             assertEquals(target.getMetaDescriptionContent(), bundle.getString("META_DESCRIPTION"));
             assertEquals(target.getPageTitle(), bundle.getString("META_TITLE"));
             assertEquals(target.getHowToUseLinkText(), bundle.getString("LABEL_WHATSTHIS"));
