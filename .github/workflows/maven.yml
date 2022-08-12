@@ -24,7 +24,10 @@ jobs:
 #      run: |
 #        sudo apt install -y language-pack-ja chromium-browser-l10n
 
-    - name: Install Google Chrome and ChromeDriver
+    - name: Install Google Chrome
+      run: winget install --id Google.Chrome --silent
+
+    - name: Install ChromeDriver
       uses: nanasess/setup-chromedriver@v1
 
     - name: Run UT/IT
