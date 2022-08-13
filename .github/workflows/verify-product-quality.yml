@@ -35,7 +35,8 @@ jobs:
       uses: nanasess/setup-chromedriver@v1
 
     - name: Verify Quality
-      run: mvn clean verify --batch-mode `
+      run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar `
+        --batch-mode `
         --file pom.xml `
         --settings .github/workflows/settings.xml `
         --activate-profiles="GitHub Actions CI"
