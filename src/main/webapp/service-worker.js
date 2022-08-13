@@ -1,6 +1,6 @@
 // キャッシュ名とキャッシュ対象の指定
-var CACHE_NAME = 'sprandoom1-caches';
-var urlsToCache = [
+const CACHE_NAME = 'sprandoom1-caches';
+const urlsToCache = [
   '/sprandoom1/'
 ];
 
