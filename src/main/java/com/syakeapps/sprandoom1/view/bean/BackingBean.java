@@ -54,9 +54,7 @@ public class BackingBean implements Serializable {
                 Control.getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT));
 
         List<WeaponClass> classes = context.getClasses();
-        selectedClassIds = classes.stream().map(c -> {
-            return String.valueOf(c.getId());
-        }).collect(Collectors.joining(","));
+        selectedClassIds = classes.stream().map(c -> String.valueOf(c.getId())).collect(Collectors.joining(","));
 
         rand = SecureRandom.getInstanceStrong();
         pickupedWeapon = context.getWeapons().get(0);
@@ -88,9 +86,7 @@ public class BackingBean implements Serializable {
     private List<Weapon> createCandidates() {
         List<Weapon> candidate = new ArrayList<>();
 
-        List<Integer> convertedIds = Arrays.asList(selectedClassIds.split(",")).stream().map(strId -> {
-            return Integer.valueOf(strId);
-        }).collect(Collectors.toList());
+        List<Integer> convertedIds = Arrays.asList(selectedClassIds.split(",")).stream().map(Integer::valueOf).toList();
 
         if (convertedIds.size() == context.getClasses().size()) {
             candidate = context.getWeapons();
