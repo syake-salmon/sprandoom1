@@ -2,9 +2,9 @@ name: Verify Product Quality
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "develop-*" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "develop-*" ]
 
 jobs:
   verify:
