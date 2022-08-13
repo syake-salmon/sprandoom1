@@ -5,7 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -105,24 +104,30 @@ public class BackingBean implements Serializable {
 
         /* filtering by sub */
         if (selectedSubId != 0) {
-            Iterator<Weapon> i = candidate.iterator();
-            while (i.hasNext()) {
-                Weapon w = i.next();
-                if (w.getSub().getId() != selectedSubId) {
-                    i.remove();
-                }
-            }
+            candidate = candidate.stream().filter(w -> w.getSub().getId() == selectedSubId)
+                    .collect(Collectors.toList());
+
+            // Iterator<Weapon> i = candidate.iterator();
+            // while (i.hasNext()) {
+            // Weapon w = i.next();
+            // if (w.getSub().getId() != selectedSubId) {
+            // i.remove();
+            // }
+            // }
         }
 
         /* filtering by special */
         if (selectedSpecialId != 0) {
-            Iterator<Weapon> i = candidate.iterator();
-            while (i.hasNext()) {
-                Weapon w = i.next();
-                if (w.getSpecial().getId() != selectedSpecialId) {
-                    i.remove();
-                }
-            }
+            candidate = candidate.stream().filter(w -> w.getSpecial().getId() == selectedSpecialId)
+                    .collect(Collectors.toList());
+
+            // Iterator<Weapon> i = candidate.iterator();
+            // while (i.hasNext()) {
+            // Weapon w = i.next();
+            // if (w.getSpecial().getId() != selectedSpecialId) {
+            // i.remove();
+            // }
+            // }
         }
 
         return candidate;
