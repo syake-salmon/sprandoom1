@@ -5,7 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -67,57 +66,60 @@ public class BackingBean implements Serializable {
 
     @Transactional
     public void randomizeWeapon() {
-        /* filtering by class */
+        /* class setting check */
         if (selectedClassIds == null || selectedClassIds.isEmpty()) {
             FacesMessages.warning(bundle.getString("MSG_WARN_CLASS_IS_REQUIRED"));
             return;
         }
 
+        /* filtering by settings */
+        List<Weapon> candidates = createCandidates();
+
+        /* size check */
+        if (candidates.size() == 0) {
+            FacesMessages.warning(bundle.getString("MSG_WARN_NO_WEAPON_HIT"));
+            return;
+        }
+
+        /* pick up a random weapon */
+        pickupedWeapon = pickupRandom(candidates);
+    }
+
+    private List<Weapon> createCandidates() {
+        List<Weapon> candidate = new ArrayList<>();
+
         List<Integer> convertedIds = Arrays.asList(selectedClassIds.split(",")).stream().map(strId -> {
             return Integer.valueOf(strId);
         }).collect(Collectors.toList());
 
-        List<Weapon> weapons = new ArrayList<>();
         if (convertedIds.size() == context.getClasses().size()) {
-            weapons = context.getWeapons();
+            candidate = context.getWeapons();
         } else {
             List<WeaponClass> classes = em.createNamedQuery(WeaponClass.FIND_BY_IDS, WeaponClass.class)
                     .setParameter("ids", convertedIds).getResultList();
+
             for (int i = 0; i < classes.size(); i++) {
-                weapons.addAll(classes.get(i).getWeapons());
+                candidate.addAll(classes.get(i).getWeapons());
             }
         }
 
         /* filtering by sub */
         if (selectedSubId != 0) {
-            Iterator<Weapon> i = weapons.iterator();
-            while (i.hasNext()) {
-                Weapon w = i.next();
-                if (w.getSub().getId() != selectedSubId) {
-                    i.remove();
-                }
-            }
+            candidate = candidate.stream().filter(w -> w.getSub().getId() == selectedSubId)
+                    .collect(Collectors.toList());
         }
 
         /* filtering by special */
         if (selectedSpecialId != 0) {
-            Iterator<Weapon> i = weapons.iterator();
-            while (i.hasNext()) {
-                Weapon w = i.next();
-                if (w.getSpecial().getId() != selectedSpecialId) {
-                    i.remove();
-                }
-            }
+            candidate = candidate.stream().filter(w -> w.getSpecial().getId() == selectedSpecialId)
+                    .collect(Collectors.toList());
         }
 
-        /* size check */
-        if (weapons.size() == 0) {
-            FacesMessages.warning(bundle.getString("MSG_WARN_NO_WEAPON_HIT"));
-            return;
-        }
+        return candidate;
+    }
 
-        /* pick a random number */
-        pickupedWeapon = weapons.get(rand.nextInt(weapons.size()));
+    private <T> T pickupRandom(List<T> candidates) {
+        return candidates.get(rand.nextInt(candidates.size()));
     }
 
     /* GETTER & SETTER */
