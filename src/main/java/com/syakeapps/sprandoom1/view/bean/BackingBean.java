@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.ResourceBundle.Control;
 import java.util.stream.Collectors;
@@ -46,7 +45,7 @@ public class BackingBean implements Serializable {
     private int selectedSpecialId = 0;
 
     /* Randomized Weapon */
-    private Random rand;
+    SecureRandom rand;
     private Weapon pickupedWeapon;
 
     @PostConstruct
@@ -118,7 +117,7 @@ public class BackingBean implements Serializable {
         }
 
         /* pick a random number */
-        pickupedWeapon = weapons.get(rand.nextInt());
+        pickupedWeapon = weapons.get(rand.nextInt(weapons.size()));
     }
 
     /* GETTER & SETTER */
