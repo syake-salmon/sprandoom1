@@ -26,7 +26,7 @@ jobs:
         --batch-mode \
         --file pom.xml \
         --settings .github/workflows/settings.xml \
-        --activate-profiles="GitHub Actions CI \
+        --activate-profiles="GitHub Actions CI" \
         -Dskip.it=true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
