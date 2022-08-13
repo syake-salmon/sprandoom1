@@ -1,6 +1,8 @@
 package com.syakeapps.sprandoom1.view.bean;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -44,10 +46,11 @@ public class BackingBean implements Serializable {
     private int selectedSpecialId = 0;
 
     /* Randomized Weapon */
+    private Random rand;
     private Weapon pickupedWeapon;
 
     @PostConstruct
-    public void postConstruct() {
+    public void postConstruct() throws NoSuchAlgorithmException {
         bundle = ResourceBundle.getBundle("locale.Messages",
                 FacesContext.getCurrentInstance().getViewRoot().getLocale(),
                 Control.getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT));
@@ -57,6 +60,7 @@ public class BackingBean implements Serializable {
             return String.valueOf(c.getId());
         }).collect(Collectors.joining(","));
 
+        rand = SecureRandom.getInstanceStrong();
         pickupedWeapon = context.getWeapons().get(0);
 
         FacesMessages.info(bundle.getString("MSG_INFO_INITIALIZED"));
@@ -114,8 +118,7 @@ public class BackingBean implements Serializable {
         }
 
         /* pick a random number */
-        int r = new Random().nextInt(weapons.size());
-        pickupedWeapon = weapons.get(r);
+        pickupedWeapon = weapons.get(rand.nextInt());
     }
 
     /* GETTER & SETTER */
