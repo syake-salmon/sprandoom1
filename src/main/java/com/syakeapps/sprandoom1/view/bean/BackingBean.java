@@ -97,6 +97,7 @@ public class BackingBean implements Serializable {
         } else {
             List<WeaponClass> classes = em.createNamedQuery(WeaponClass.FIND_BY_IDS, WeaponClass.class)
                     .setParameter("ids", convertedIds).getResultList();
+
             for (int i = 0; i < classes.size(); i++) {
                 candidate.addAll(classes.get(i).getWeapons());
             }
@@ -106,28 +107,12 @@ public class BackingBean implements Serializable {
         if (selectedSubId != 0) {
             candidate = candidate.stream().filter(w -> w.getSub().getId() == selectedSubId)
                     .collect(Collectors.toList());
-
-            // Iterator<Weapon> i = candidate.iterator();
-            // while (i.hasNext()) {
-            // Weapon w = i.next();
-            // if (w.getSub().getId() != selectedSubId) {
-            // i.remove();
-            // }
-            // }
         }
 
         /* filtering by special */
         if (selectedSpecialId != 0) {
             candidate = candidate.stream().filter(w -> w.getSpecial().getId() == selectedSpecialId)
                     .collect(Collectors.toList());
-
-            // Iterator<Weapon> i = candidate.iterator();
-            // while (i.hasNext()) {
-            // Weapon w = i.next();
-            // if (w.getSpecial().getId() != selectedSpecialId) {
-            // i.remove();
-            // }
-            // }
         }
 
         return candidate;
