@@ -30,13 +30,13 @@
     media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2)" />
   <link rel="stylesheet" href="./css/custom-button-group.css" />
   <title>#{msg['META_TITLE']}</title>
-  <script>
+  <script nonce="#{NONCE.nonce}">
     var nend_params = {"media":16766,"site":358659,"spot":1063424,"type":2,"oriented":1};
   </script>
-  <script src="https://js1.nend.net/js/nendAdLoader.js"></script>
+  <script src="https://js1.nend.net/js/nendAdLoader.js" nonce="#{NONCE.nonce}"></script>
   <script async="async"
-    src="https://www.googletagmanager.com/gtag/js?id=G-KK2V4LTW4K"></script>
-  <script>
+    src="https://www.googletagmanager.com/gtag/js?id=G-KK2V4LTW4K" nonce="#{NONCE.nonce}"></script>
+  <script nonce="#{NONCE.nonce}">
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
@@ -139,7 +139,7 @@
       placementFrom="top" />
   </b:container>
 
-  <script>
+  <script nonce="#{NONCE.nonce}">
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("./service-worker.js", {scope: "./"}).then(function(reg) {
         console.log('ServiceWorker registration successful with scope: ', reg.scope);
