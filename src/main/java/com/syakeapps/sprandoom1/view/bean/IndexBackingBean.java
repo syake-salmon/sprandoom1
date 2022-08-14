@@ -27,8 +27,8 @@ import net.bootsfaces.utils.FacesMessages;
 
 @SuppressWarnings("serial")
 @SessionScoped
-@Named(value = "BB")
-public class BackingBean implements Serializable {
+@Named(value = "IDX_BB")
+public class IndexBackingBean implements Serializable {
 
     @Inject
     private ApplicationContext context;

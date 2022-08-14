@@ -30,13 +30,13 @@
     media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2)" />
   <link rel="stylesheet" href="./css/custom-button-group.css" />
   <title>#{msg['META_TITLE']}</title>
-  <script>
+  <script nonce="#{NONCE.nonce}">
     var nend_params = {"media":16766,"site":358659,"spot":1063424,"type":2,"oriented":1};
   </script>
-  <script src="https://js1.nend.net/js/nendAdLoader.js"></script>
+  <script src="https://js1.nend.net/js/nendAdLoader.js" nonce="#{NONCE.nonce}"></script>
   <script async="async"
-    src="https://www.googletagmanager.com/gtag/js?id=G-KK2V4LTW4K"></script>
-  <script>
+    src="https://www.googletagmanager.com/gtag/js?id=G-KK2V4LTW4K" nonce="#{NONCE.nonce}"></script>
+  <script nonce="#{NONCE.nonce}">
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
@@ -51,7 +51,7 @@
         <p>#{msg['TEXT_HOWTOUSE']}</p>
         <p>
           #{msg['TEXT_CAUTION']}(<a href="https://twitter.com/syakeApps"
-            target="_blank">@syakeApps</a>)
+            target="_blank" rel="noopener">@syakeApps</a>)
         </p>
         <f:facet name="footer">
           <b:button value="#{msg['LABEL_CLOSE']}" look="secondary"
@@ -76,14 +76,14 @@
 
       <b:row id="weapon-img-area">
         <b:column style-class="text-center">
-          <img src="./img/buki/#{BB.pickupedWeapon.id}.png" class="img-fluid"
+          <img src="./img/buki/#{IDX_BB.pickupedWeapon.id}.png" class="img-fluid"
             alt="Weapon Image" />
         </b:column>
       </b:row>
 
       <b:row id="weapon-name-area">
         <b:column style-class="text-center">
-          <h5>#{BB.pickupedWeapon.getLocalizedName(BB.userLocale)}</h5>
+          <h5>#{IDX_BB.pickupedWeapon.getLocalizedName(IDX_BB.userLocale)}</h5>
         </b:column>
       </b:row>
 
@@ -92,30 +92,30 @@
         <b:column col-lg="6" col-md="6">
           <b:panel title="#{msg['LABEL_SETTING']}" collapsed="true">
             <h:outputLabel value="#{msg['LABEL_CLASS']}" for="class" />
-            <b:selectMultiMenu id="class" value="#{BB.selectedClassIds}"
+            <b:selectMultiMenu id="class" value="#{IDX_BB.selectedClassIds}"
               all-selected-text="#{msg['LABEL_ALL_SELECTED']}"
               non-selected-text="#{msg['LABEL_NO_SELECTED']}"
               size="#{APP.classes.size()}">
               <f:selectItems value="#{APP.classes}" var="c" itemValue="#{c.id}"
-                itemLabel="#{c.getLocalizedName(BB.userLocale)}" />
+                itemLabel="#{c.getLocalizedName(IDX_BB.userLocale)}" />
             </b:selectMultiMenu>
             <b:formGroup>
               <h:outputLabel value="#{msg['LABLE_SUB']}" for="sub" />
-              <b:selectOneMenu id="sub" value="#{BB.selectedSubId}">
+              <b:selectOneMenu id="sub" value="#{IDX_BB.selectedSubId}">
                 <f:selectItem itemLabel="#{msg['LABEL_NO_SELECTED']}"
                   itemValue="0" />
                 <f:selectItems value="#{APP.subs}" var="s" itemValue="#{s.id}"
-                  itemLabel="#{s.getLocalizedName(BB.userLocale)}" />
+                  itemLabel="#{s.getLocalizedName(IDX_BB.userLocale)}" />
               </b:selectOneMenu>
             </b:formGroup>
             <b:formGroup>
               <h:outputLabel value="#{msg['LABLE_SPECIAL']}" for="special" />
-              <b:selectOneMenu id="special" value="#{BB.selectedSpecialId}">
+              <b:selectOneMenu id="special" value="#{IDX_BB.selectedSpecialId}">
                 <f:selectItem itemLabel="#{msg['LABEL_NO_SELECTED']}"
                   itemValue="0" />
                 <f:selectItems value="#{APP.specials}" var="s"
                   itemValue="#{s.id}"
-                  itemLabel="#{s.getLocalizedName(BB.userLocale)}" />
+                  itemLabel="#{s.getLocalizedName(IDX_BB.userLocale)}" />
               </b:selectOneMenu>
             </b:formGroup>
           </b:panel>
@@ -128,7 +128,7 @@
         <b:column col-lg="6" col-md="6" style-class="text-center">
           <h:commandButton styleClass="btn btn-primary btn-block"
             value="#{msg['LABEL_RANDOMIZE']}"
-            actionListener="#{BB.randomizeWeapon()}" />
+            actionListener="#{IDX_BB.randomizeWeapon()}" />
         </b:column>
         <b:column col-lg="3" col-md="3" />
       </b:row>
@@ -139,7 +139,7 @@
       placementFrom="top" />
   </b:container>
 
-  <script>
+  <script nonce="#{NONCE.nonce}">
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("./service-worker.js", {scope: "./"}).then(function(reg) {
         console.log('ServiceWorker registration successful with scope: ', reg.scope);
