@@ -14,6 +14,8 @@ import com.syakeapps.sprandoom1.jpa.bean.Sub;
 import com.syakeapps.sprandoom1.jpa.bean.Weapon;
 import com.syakeapps.sprandoom1.jpa.bean.WeaponClass;
 
+import lombok.Getter;
+
 @ApplicationScoped
 @Named(value = "APP")
 public class ApplicationContext {
@@ -23,9 +25,13 @@ public class ApplicationContext {
     private EntityManager em;
 
     /* CONST */
+    @Getter(onMethod_ = { @lombok.Generated })
     private List<Weapon> weapons;
+    @Getter(onMethod_ = { @lombok.Generated })
     private List<WeaponClass> classes;
+    @Getter(onMethod_ = { @lombok.Generated })
     private List<Sub> subs;
+    @Getter(onMethod_ = { @lombok.Generated })
     private List<Special> specials;
 
     @PostConstruct
@@ -36,21 +42,5 @@ public class ApplicationContext {
         subs = em.createNamedQuery(Sub.FIND_ALL, Sub.class).getResultList();
         specials = em.createNamedQuery(Special.FIND_ALL, Special.class).getResultList();
         LOGGER.info("Initializing application is done.");
-    }
-
-    public List<Weapon> getWeapons() {
-        return weapons;
-    }
-
-    public List<WeaponClass> getClasses() {
-        return classes;
-    }
-
-    public List<Sub> getSubs() {
-        return subs;
-    }
-
-    public List<Special> getSpecials() {
-        return specials;
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
 import lombok.Setter;
 
 @Entity
@@ -19,34 +20,22 @@ public class Sub extends MultilingualEntityBase {
 
     @Id
     @Column(name = "sub_id")
+    @Getter(onMethod_ = { @lombok.Generated })
     @Setter(onMethod_ = { @lombok.Generated })
     private int id;
 
     @Column(name = "sub_jpn_name")
+    @Getter(onMethod_ = { @lombok.Generated })
     @Setter(onMethod_ = { @lombok.Generated })
     private String jpnName;
 
     @Column(name = "sub_eng_name")
+    @Getter(onMethod_ = { @lombok.Generated })
     @Setter(onMethod_ = { @lombok.Generated })
     private String engName;
 
     @OneToMany(mappedBy = "sub")
+    @Getter(onMethod_ = { @lombok.Generated })
     @Setter(onMethod_ = { @lombok.Generated })
     private List<Weapon> weapons;
-
-    public int getId() {
-        return id;
-    }
-
-    public String getJpnName() {
-        return jpnName;
-    }
-
-    public String getEngName() {
-        return engName;
-    }
-
-    public List<Weapon> getWeapons() {
-        return weapons;
-    }
 }
