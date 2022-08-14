@@ -23,12 +23,14 @@ import javax.transaction.Transactional;
 import com.syakeapps.sprandoom1.jpa.bean.Weapon;
 import com.syakeapps.sprandoom1.jpa.bean.WeaponClass;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.bootsfaces.utils.FacesMessages;
 
 @SuppressWarnings("serial")
 @SessionScoped
-@Named(value = "BB")
-public class BackingBean implements Serializable {
+@Named(value = "IDX_BB")
+public class IndexBackingBean implements Serializable {
 
     @Inject
     private ApplicationContext context;
@@ -39,12 +41,19 @@ public class BackingBean implements Serializable {
     private ResourceBundle bundle;
 
     /* Randomizer User Setting */
+    @Getter(onMethod_ = { @lombok.Generated })
+    @Setter(onMethod_ = { @lombok.Generated })
     private String selectedClassIds;
+    @Getter(onMethod_ = { @lombok.Generated })
+    @Setter(onMethod_ = { @lombok.Generated })
     private int selectedSubId = 0;
+    @Getter(onMethod_ = { @lombok.Generated })
+    @Setter(onMethod_ = { @lombok.Generated })
     private int selectedSpecialId = 0;
 
     /* Randomized Weapon */
     SecureRandom rand;
+    @Getter(onMethod_ = { @lombok.Generated })
     private Weapon pickupedWeapon;
 
     @PostConstruct
@@ -54,9 +63,7 @@ public class BackingBean implements Serializable {
                 Control.getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT));
 
         List<WeaponClass> classes = context.getClasses();
-        selectedClassIds = classes.stream().map(c -> {
-            return String.valueOf(c.getId());
-        }).collect(Collectors.joining(","));
+        selectedClassIds = classes.stream().map(c -> String.valueOf(c.getId())).collect(Collectors.joining(","));
 
         rand = SecureRandom.getInstanceStrong();
         pickupedWeapon = context.getWeapons().get(0);
@@ -88,9 +95,7 @@ public class BackingBean implements Serializable {
     private List<Weapon> createCandidates() {
         List<Weapon> candidate = new ArrayList<>();
 
-        List<Integer> convertedIds = Arrays.asList(selectedClassIds.split(",")).stream().map(strId -> {
-            return Integer.valueOf(strId);
-        }).collect(Collectors.toList());
+        List<Integer> convertedIds = Arrays.asList(selectedClassIds.split(",")).stream().map(Integer::valueOf).toList();
 
         if (convertedIds.size() == context.getClasses().size()) {
             candidate = context.getWeapons();
@@ -125,33 +130,5 @@ public class BackingBean implements Serializable {
     /* GETTER & SETTER */
     public Locale getUserLocale() {
         return bundle.getLocale();
-    }
-
-    public String getSelectedClassIds() {
-        return selectedClassIds;
-    }
-
-    public void setSelectedClassIds(String selectedClassIds) {
-        this.selectedClassIds = selectedClassIds;
-    }
-
-    public int getSelectedSubId() {
-        return selectedSubId;
-    }
-
-    public void setSelectedSubId(int selectedSubId) {
-        this.selectedSubId = selectedSubId;
-    }
-
-    public int getSelectedSpecialId() {
-        return selectedSpecialId;
-    }
-
-    public void setSelectedSpecialId(int selectedSpecialId) {
-        this.selectedSpecialId = selectedSpecialId;
-    }
-
-    public Weapon getPickupedWeapon() {
-        return pickupedWeapon;
     }
 }
