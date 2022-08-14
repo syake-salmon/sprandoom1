@@ -7,12 +7,15 @@ import javax.inject.Named;
 
 import com.google.common.net.HttpHeaders;
 
+import lombok.Getter;
+
 @RequestScoped
 @Named("NONCE")
 public class GeneratedNonceBean {
     private static final String NONCE_PREFIX = "nonce-";
     private static final int NONCE_LENGTH = 24;
 
+    @Getter(onMethod_ = { @lombok.Generated })
     private String nonce;
 
     @PostConstruct
@@ -28,9 +31,5 @@ public class GeneratedNonceBean {
         if (nonce == null || nonce.isEmpty()) {
             nonce = String.valueOf(System.currentTimeMillis());
         }
-    }
-
-    public String getNonce() {
-        return nonce;
     }
 }
