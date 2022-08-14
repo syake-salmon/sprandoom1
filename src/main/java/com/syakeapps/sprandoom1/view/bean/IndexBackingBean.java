@@ -83,7 +83,7 @@ public class IndexBackingBean implements Serializable {
         List<Weapon> candidates = createCandidates();
 
         /* size check */
-        if (candidates.size() == 0) {
+        if (candidates.isEmpty()) {
             FacesMessages.warning(bundle.getString("MSG_WARN_NO_WEAPON_HIT"));
             return;
         }
