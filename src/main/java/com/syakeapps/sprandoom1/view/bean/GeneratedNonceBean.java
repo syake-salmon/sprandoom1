@@ -19,8 +19,15 @@ public class GeneratedNonceBean {
     public void postConstruct() {
         String headerVal = FacesContext.getCurrentInstance().getExternalContext().getRequestHeaderMap()
                 .get(HttpHeaders.CONTENT_SECURITY_POLICY);
-        int nonceStartAt = headerVal.indexOf(NONCE_PREFIX) + NONCE_PREFIX.length();
-        nonce = headerVal.substring(nonceStartAt, nonceStartAt + NONCE_LENGTH);
+
+        if (headerVal != null && !headerVal.isEmpty()) {
+            int nonceStartAt = headerVal.indexOf(NONCE_PREFIX) + NONCE_PREFIX.length();
+            nonce = headerVal.substring(nonceStartAt, nonceStartAt + NONCE_LENGTH);
+        }
+
+        if (nonce == null || nonce.isEmpty()) {
+            nonce = String.valueOf(System.currentTimeMillis());
+        }
     }
 
     public String getNonce() {
